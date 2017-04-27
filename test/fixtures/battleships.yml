@@ -1,0 +1,12 @@
+#left:
+#  x: 0
+#  y: 3
+##  board: easy
+#center:
+#  x: 4
+#  y: 8
+##  board: easy
+#right:
+#  x: 6
+#  y: 6
+##  board: easy

@@ -21,6 +21,7 @@ gem 'puma', '~> 3.0'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
