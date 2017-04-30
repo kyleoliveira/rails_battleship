@@ -9,17 +9,27 @@ class Board < ApplicationRecord
   MAX_GRID_WIDTH = 10
 
   def self.parse_input(input)
-    found = input.scan(/\[\[(.,.)\],\[(.,.)\],\[(.,.)\]\]/)
-    found.collect { |b| { x: b[0], y: b[1] } }
+    found_pairs = input.scan(/\[\[(\d,\d)\],\[(\d,\d)\],\[(\d,\d)\]\]/).first
+
+    found_pairs.collect do |b|
+      x, y = b.scan(/(\d),(\d)/).first
+
+      {
+        x: x.to_i,
+        y: y.to_i
+      }
+    end
   end
 
   def to_input
-    "[#{battleships.collect(&:to_input).join(',').gsub(/,$/, '')}]"
+    "[#{battleships.order(x: :asc).collect(&:to_input).join(',').gsub(/,$/, '')}]"
   end
 
   def register_hit(x, y)
     battleships.each do |battleship|
       return battleship.hit!(x, y) if battleship.would_be_hit?(x, y)
     end
+
+    HitResponse::MISS
   end
 end

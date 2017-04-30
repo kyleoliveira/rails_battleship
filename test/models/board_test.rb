@@ -2,22 +2,18 @@ require 'test_helper'
 
 class BoardTest < ActiveSupport::TestCase
   def setup
-    @board = Board.new battleships_attributes: [
+    @board = boards(:easy)
+  end
+
+  test 'should parse battleship string' do
+    input_str = '[[0,3],[4,8],[6,6]]'
+    output_array = [
       { x: 0, y: 3 },
       { x: 4, y: 8 },
       { x: 6, y: 6 }
     ]
+    assert_equal output_array, Board.parse_input(input_str)
   end
-
-  # test 'should parse battleship string' do
-  #   input_str = '[[0,3],[4,8],[6,6]]'
-  #   output_array = [
-  #       { x: 0, y: 3 },
-  #       { x: 4, y: 8 },
-  #       { x: 6, y: 6 }
-  #   ]
-  #   assert_equal output_array, Board.parse_input(input_str)
-  # end
 
   test 'should print current battleships' do
     output_str = '[[0,3],[4,8],[6,6]]'

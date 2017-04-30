@@ -2,9 +2,6 @@ require 'test_helper'
 
 class BattleshipTest < ActiveSupport::TestCase
   def setup
-    # @battleship = Battleship.new x: 0, y: 2
-    # @max_grid_length = 10
-    # @max_grid_width = 10
     @battleship = battleships(:left)
   end
 

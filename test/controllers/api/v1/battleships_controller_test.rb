@@ -3,7 +3,6 @@ require 'test_helper'
 class BattleshipsControllerTest < ActionController::TestCase
   def setup
     @controller = Api::V1::BattleshipsController.new
-    @board = boards(:easy)
   end
 
   test 'should create battleships' do
@@ -65,18 +64,24 @@ class BattleshipsControllerTest < ActionController::TestCase
   end
 
   test 'should hit battleships' do
+    include_board
+
     patch :update,
           params: { x: 0, y: 1 }
     assert_response :ok, 'hit'
   end
 
   test 'should miss battleships' do
+    include_board
+
     patch :update,
           params: { x: 0, y: 0 }
     assert_response :ok, 'miss'
   end
 
   test 'should sunk battleships' do
+    include_board
+
     patch :update,
           params: { x: 0, y: 0 }
     assert_response :ok, 'sunk'
@@ -87,4 +92,11 @@ class BattleshipsControllerTest < ActionController::TestCase
           params: { x: 0, y: 0 }
     assert_response :ok, 'game over!'
   end
+
+  private
+
+    def include_board
+      board = boards(:easy)
+      board.save!
+    end
 end

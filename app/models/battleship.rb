@@ -39,21 +39,28 @@ class Battleship < ApplicationRecord
   end
 
   def hit!(x, y)
+    response = HitResponse::MISS
+
     if x == self.x
+      response = HitResponse::HIT
+
       case y
       when bow
         self.bow_hit = true
+        save!
       when middle
         self.middle_hit = true
+        save!
       when aft
         self.aft_hit = true
+        save!
+      else
+        response = HitResponse::MISS
       end
 
-      save!
-
-      sunk? ? 'sunk' : 'hit'
-    else
-      'miss'
+      response = HitResponse::SUNK if sunk?
     end
+
+    response
   end
 end
