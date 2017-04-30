@@ -2,9 +2,10 @@ require 'test_helper'
 
 class BattleshipTest < ActiveSupport::TestCase
   def setup
-    @battleship = Battleship.new x: 0, y: 2
+    # @battleship = Battleship.new x: 0, y: 2
     # @max_grid_length = 10
     # @max_grid_width = 10
+    @battleship = battleships(:left)
   end
 
   test 'should be valid' do
@@ -22,7 +23,7 @@ class BattleshipTest < ActiveSupport::TestCase
   end
 
   test 'x should be in bounds' do
-    @battleship.x = Board.MAX_GRID_WIDTH + 1
+    @battleship.x = Board::MAX_GRID_WIDTH + 1
     assert_not @battleship.valid?
   end
 
@@ -37,7 +38,7 @@ class BattleshipTest < ActiveSupport::TestCase
   end
 
   test 'y should be in bounds' do
-    @battleship.y = Board.MAX_GRID_LENGTH + 1
+    @battleship.y = Board::MAX_GRID_LENGTH + 1
     assert_not @battleship.valid?
   end
 

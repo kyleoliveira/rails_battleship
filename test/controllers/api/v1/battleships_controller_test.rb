@@ -2,14 +2,8 @@ require 'test_helper'
 
 class BattleshipsControllerTest < ActionController::TestCase
   def setup
-    # @easy_ships = battleships(:ships)
     @controller = Api::V1::BattleshipsController.new
-    @board = Board.new battleships_attributes: [
-        {x: 0, y: 3},
-        {x: 4, y: 8},
-        {x: 6, y: 6}
-    ]
-    @board.save
+    @board = boards(:easy)
   end
 
   test 'should create battleships' do
@@ -17,9 +11,9 @@ class BattleshipsControllerTest < ActionController::TestCase
       post :create,
            params: {
              positions: [
-                 {x: 0, y: 3},
-                 {x: 4, y: 8},
-                 {x: 6, y: 6}
+               { x: 0, y: 3 },
+               { x: 4, y: 8 },
+               { x: 6, y: 6 }
              ]
            }
     end
@@ -30,10 +24,10 @@ class BattleshipsControllerTest < ActionController::TestCase
     assert_no_difference('Battleship.count') do
       post :create,
            params: {
-               positions: [
-                   {x: 0, y: 3},
-                   {x: 6, y: 6}
-               ]
+             positions: [
+               { x: 0, y: 3 },
+               { x: 6, y: 6 }
+             ]
            }
     end
     assert_response :length_required, 'Need more ships'
@@ -43,12 +37,12 @@ class BattleshipsControllerTest < ActionController::TestCase
     assert_no_difference('Battleship.count') do
       post :create,
            params: {
-               positions: [
-                   {x: 0, y: 3},
-                   {x: 4, y: 8},
-                   {x: 6, y: 6},
-                   {x: 7, y: 6}
-               ]
+             positions: [
+               { x: 0, y: 3 },
+               { x: 4, y: 8 },
+               { x: 6, y: 6 },
+               { x: 7, y: 6 }
+             ]
            }
     end
     assert_response :not_acceptable, 'Need fewer ships'
@@ -58,41 +52,37 @@ class BattleshipsControllerTest < ActionController::TestCase
     assert_no_difference('Battleship.count') do
       post :create,
            params: {
-               positions: [
-                   {x: 0, y: 3},
-                   {x: 4, y: 8},
-                   {x: 6, y: 6},
-                   {x: 7, y: 6},
-                   {x: 8, y: 6}
-               ]
+             positions: [
+               { x: 0, y: 3 },
+               { x: 4, y: 8 },
+               { x: 6, y: 6 },
+               { x: 7, y: 6 },
+               { x: 8, y: 6 }
+             ]
            }
     end
     assert_response :not_acceptable, 'Five is right out!'
   end
 
   test 'should hit battleships' do
-    # TODO: Needs a fixture with a proper board
     patch :update,
-          params: { x: 0, y: 0 }
+          params: { x: 0, y: 1 }
     assert_response :ok, 'hit'
   end
 
   test 'should miss battleships' do
-    # TODO: Needs a fixture with a proper board
     patch :update,
           params: { x: 0, y: 0 }
     assert_response :ok, 'miss'
   end
 
   test 'should sunk battleships' do
-    # TODO: Needs a fixture with a proper board
     patch :update,
           params: { x: 0, y: 0 }
     assert_response :ok, 'sunk'
   end
 
   test 'should report game over' do
-    # TODO: Needs a fixture with a nearly won board
     patch :update,
           params: { x: 0, y: 0 }
     assert_response :ok, 'game over!'

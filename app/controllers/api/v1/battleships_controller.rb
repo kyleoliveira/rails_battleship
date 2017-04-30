@@ -4,7 +4,7 @@ module Api::V1
 
     def create
       # positions = Board.parse_input(params['positions'])
-      positions = params[:positions].collect{ |r| {x: r[:x].to_i, y: r[:y].to_i} }
+      positions = params[:positions].collect { |r| { x: r[:x].to_i, y: r[:y].to_i } }
 
       @board = Board.new battleships_attributes: positions
       if @board.save
@@ -20,7 +20,7 @@ module Api::V1
       y = params['y'].to_i
 
       # Fill in body to take x and y coordinates and return result as "miss", "hit" or "sunk"
-      result = @board.register_hit(x,y)
+      result = @board.register_hit(x, y)
       render plain: result
     end
   end
