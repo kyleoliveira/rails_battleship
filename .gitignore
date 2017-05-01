@@ -20,4 +20,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# RubyMine files
 .idea
+
+# Simplecov
+coverage
