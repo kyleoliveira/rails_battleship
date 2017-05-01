@@ -15,8 +15,8 @@ class Board < ApplicationRecord
       x, y = b.scan(/(\d),(\d)/).first
 
       {
-          x: x.to_i,
-          y: y.to_i
+        x: x.to_i,
+        y: y.to_i
       }
     end
   end

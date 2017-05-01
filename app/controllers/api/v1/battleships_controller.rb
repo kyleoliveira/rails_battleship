@@ -2,23 +2,22 @@ module Api::V1
   class BattleshipsController < ApiController
     include ActionController::Serialization
 
-    before_action :set_board, only: [:update, :nuke]
+    before_action :set_board, only: [:update]
 
     def index
-      games = Board.all.collect { |b| { id: b.id, status: b.status_indicator } }
-      render plain: games.to_s, status: :ok
+      render plain: 'Not implemented', status: :bad_request
+    end
+
+    def show
+      render plain: 'Not implemented', status: :bad_request
     end
 
     def create
-      positions = Board.parse_input(params['positions'])
+      render plain: 'Not implemented', status: :bad_request
+    end
 
-      @board = Board.new battleships_attributes: positions unless positions.nil?
-
-      if !@board.nil? && @board.save
-        render plain: 'OK', status: :ok
-      else
-        render ShipCountErrorMessageService.new(positions: positions).perform
-      end
+    def destroy
+      render plain: 'Not implemented', status: :bad_request
     end
 
     def update
@@ -29,11 +28,6 @@ module Api::V1
       result = HitResponse::GAME_OVER if @board.game_over?
 
       render plain: result
-    end
-
-    def nuke
-      @board.nuke!
-      render plain: @board.status_indicator, status: :ok
     end
 
     private
