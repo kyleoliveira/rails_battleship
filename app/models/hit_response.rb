@@ -1,6 +1,6 @@
 class HitResponse
-  HIT = 'hit'.freeze
-  MISS = 'miss'.freeze
-  SUNK = 'sunk'.freeze
-  GAME_OVER = 'game over!'.freeze
+  HIT = '{\"result\": \"hit\"}'.freeze
+  MISS = '{\"result\": \"miss\"}'.freeze
+  SUNK = '{\"result\": \"sunk\"}'.freeze
+  GAME_OVER = '{\"result\": \"game over!\"}'.freeze
 end

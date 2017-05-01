@@ -10,21 +10,21 @@ class BattleshipsControllerTest < ActionController::TestCase
     put :update,
         params: { id: @board.id, x: 0, y: 1 }
     assert_response :ok
-    assert_equal 'hit', @response.body
+    assert_equal HitResponse::HIT, @response.body
   end
 
   test 'should miss battleships' do
     put :update,
         params: { id: @board.id, x: 0, y: 0 }
     assert_response :ok
-    assert_equal 'miss', @response.body
+    assert_equal HitResponse::MISS, @response.body
   end
 
   test 'should sink battleships' do
     put :update,
         params: { id: @board.id, x: 6, y: 6 }
     assert_response :ok
-    assert_equal 'sunk', @response.body
+    assert_equal HitResponse::SUNK, @response.body
   end
 
   test 'should report game over' do
@@ -36,7 +36,7 @@ class BattleshipsControllerTest < ActionController::TestCase
         params: { id: @board.id, x: 0, y: 2 }
 
     assert_response :ok
-    assert_equal 'game over!', @response.body
+    assert_equal HitResponse::GAME_OVER, @response.body
   end
 
   test 'should fail when not implemented (index)' do
