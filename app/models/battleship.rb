@@ -38,6 +38,10 @@ class Battleship < ApplicationRecord
     ]
   end
 
+  def horizontal_status_indicator
+    "#{bow_hit? ? 'X' : '<<'}#{middle_hit? ? 'X' : '$$'}#{aft_hit? ? 'X' : '>>'}"
+  end
+
   def hit!(x, y)
     response = HitResponse::MISS
 

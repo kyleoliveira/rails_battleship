@@ -2,11 +2,10 @@ module Api::V1
   class BoardsController < ApiController
     include ActionController::Serialization
 
-    before_action :set_board, only: [:nuke]
+    before_action :set_board, only: [:show, :destroy, :nuke]
 
     def index
-      games = Board.all.collect { |b| { id: b.id, status: b.status_indicator } }
-      render plain: games.to_s, status: :ok
+      render json: Board.all, status: :ok
     end
 
     def create
@@ -15,27 +14,29 @@ module Api::V1
       @board = Board.new battleships_attributes: positions unless positions.nil?
 
       if !@board.nil? && @board.save
-        render plain: 'OK', status: :ok
+        render json: @board, status: :ok
       else
         render ShipCountErrorMessageService.new(positions: positions).perform
       end
     end
 
     def show
-      render plain: 'Not implemented', status: :bad_request
+      render json: @board, status: :ok
     end
 
     def update
-      render plain: 'Not implemented', status: :bad_request
+      render json: {'Implemented': 'Nope'}, status: :bad_request
     end
 
     def destroy
-      render plain: 'Not implemented', status: :bad_request
+      id = @board.id
+      @board.destroy
+      render json: { board: id, status: 'Destroyed' }, status: :ok
     end
 
     def nuke
       @board.nuke!
-      render plain: @board.status_indicator, status: :ok
+      render json: @board, status: :ok
     end
 
     private

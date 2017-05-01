@@ -5,19 +5,19 @@ module Api::V1
     before_action :set_board, only: [:update]
 
     def index
-      render plain: 'Not implemented', status: :bad_request
+      render json: {'Implemented': 'Nope'}, status: :bad_request
     end
 
     def show
-      render plain: 'Not implemented', status: :bad_request
+      render json: {'Implemented': 'Nope'}, status: :bad_request
     end
 
     def create
-      render plain: 'Not implemented', status: :bad_request
+      render json: {'Implemented': 'Nope'}, status: :bad_request
     end
 
     def destroy
-      render plain: 'Not implemented', status: :bad_request
+      render json: {'Implemented': 'Nope'}, status: :bad_request
     end
 
     def update

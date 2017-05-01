@@ -14,7 +14,7 @@ class BoardsControllerTest < ActionController::TestCase
            }
     end
     assert_response :ok
-    assert_equal 'OK', @response.body
+    assert_equal ActiveModelSerializers::SerializableResource.new( Board.last).to_json, @response.body
   end
 
   test 'should require more than 2 battleships' do

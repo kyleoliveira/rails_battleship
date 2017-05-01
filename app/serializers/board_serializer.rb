@@ -1,3 +1,4 @@
 class BoardSerializer < ActiveModel::Serializer
-  attributes :battleships
+  attribute :id
+  has_many :battleships, serializer: BattleshipSerializer
 end

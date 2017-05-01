@@ -1,5 +1,5 @@
 class Board < ApplicationRecord
-  has_many :battleships, inverse_of: :board
+  has_many :battleships, inverse_of: :board, dependent: :delete_all
 
   validates :battleships, length: { is: 3 }
 
