@@ -38,4 +38,36 @@ class BattleshipsControllerTest < ActionController::TestCase
     assert_response :ok
     assert_equal 'game over!', @response.body
   end
+
+  test 'should fail when not implemented (index)' do
+    get :index
+    assert_response :bad_request
+    assert_equal not_implemented_message, @response.body
+  end
+
+  test 'should fail when not implemented (show)' do
+    get :show,
+        params: { id: @board.id }
+    assert_response :bad_request
+    assert_equal not_implemented_message, @response.body
+  end
+
+  test 'should fail when not implemented (create)' do
+    post :create
+    assert_response :bad_request
+    assert_equal not_implemented_message, @response.body
+  end
+
+  test 'should fail when not implemented (destroy)' do
+    post :destroy,
+         params: { id: @board.id }
+    assert_response :bad_request
+    assert_equal not_implemented_message, @response.body
+  end
+
+  private
+
+  def not_implemented_message
+    {'Implemented': 'Nope'}.to_json
+  end
 end

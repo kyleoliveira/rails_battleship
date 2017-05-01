@@ -9,15 +9,17 @@ class Board < ApplicationRecord
   MAX_GRID_WIDTH = 10
 
   def self.parse_input(input)
-    found_pairs = input.scan(/(\d,\d)+/).flatten
+    unless input.nil?
+      found_pairs = input.scan(/(\d,\d)+/).flatten
 
-    found_pairs&.collect do |b|
-      x, y = b.scan(/(\d),(\d)/).first
+      found_pairs&.collect do |b|
+        x, y = b.scan(/(\d),(\d)/).first
 
-      {
-        x: x.to_i,
-        y: y.to_i
-      }
+        {
+          x: x.to_i,
+          y: y.to_i
+        }
+      end
     end
   end
 

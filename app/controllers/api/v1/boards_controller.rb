@@ -42,7 +42,8 @@ module Api::V1
     private
 
       def set_board
-        @board = Board.find(params[:id])
+        @board = Board.find(params[:id]) if params[:board_id].nil?
+        @board = Board.find(params[:board_id]) if params[:id].nil?
       end
   end
 end
