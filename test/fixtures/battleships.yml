@@ -10,3 +10,25 @@ right:
   x: 6
   y: 6
   board: easy
+
+almost_done_left:
+  x: 0
+  y: 3
+  bow_hit: true
+  middle_hit: false
+  aft_hit: false
+  board: almost_done
+almost_done_center:
+  x: 4
+  y: 8
+  bow_hit: true
+  middle_hit: true
+  aft_hit: true
+  board: almost_done
+almost_done_right:
+  x: 6
+  y: 6
+  bow_hit: false
+  middle_hit: true
+  aft_hit: true
+  board: almost_done

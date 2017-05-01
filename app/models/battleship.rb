@@ -63,4 +63,11 @@ class Battleship < ApplicationRecord
 
     response
   end
+
+  def nuke!
+    self.bow_hit = true
+    self.middle_hit = true
+    self.aft_hit = true
+    save!
+  end
 end
